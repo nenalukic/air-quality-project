@@ -127,14 +127,14 @@ def write_to_files(data, json_filename, csv_filename):
 
     print(f"Data written to {json_filename} and {csv_filename}")
 
-# Example usage
+# Selecting cities from different parts of Spain to observe potential differences in air quality, particularly in pollen levels
 cities = [
     {"latitude": 36.7202, "longitude": -4.4203},  # Malaga
     {"latitude": 40.4165, "longitude": -3.7026},  # Madrid
     {"latitude": 43.2627, "longitude": -2.9253},  # Bilbao
     {"latitude": 41.3888, "longitude": 2.159},    # Barcelona
     {"latitude": 42.6, "longitude": -5.5703,}     # León
-    
+
     # Add more cities as needed
 ]
 
@@ -145,8 +145,8 @@ params = [{"latitude": city["latitude"], "longitude": city["longitude"],
                     "european_aqi"],
         "timezone": "Europe/Berlin",
         "forecast_days": 7}
-        for city in cities]
+        for city in cities]         # Parameters for fetching air quality data
 
-responses = fetch_air_quality_data(url, params)
-all_data = process_air_quality_data(responses)
-write_to_files(all_data, 'multi_city_air_quality.json', 'multi_city_air_quality.csv')
+responses = fetch_air_quality_data(url, params)         # Fetch weather forecast data
+all_data = process_air_quality_data(responses)          # Process weather forecast data
+write_to_files(all_data, 'multi_city_air_quality.json', 'multi_city_air_quality.csv')       # Write data to files
