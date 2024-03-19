@@ -89,9 +89,9 @@ cities = [
 
 url = "https://api.open-meteo.com/v1/forecast"
 params = [{"latitude": city["latitude"], "longitude": city["longitude"],
-           "hourly": ["temperature_2m"],
-           "forecast_days": 1}
-          for city in cities]
+        "hourly": ["temperature_2m"],
+        "forecast_days": 1}
+        for city in cities]
 
 responses = fetch_weather_data(url, params)
 all_data = process_weather_data(responses)
