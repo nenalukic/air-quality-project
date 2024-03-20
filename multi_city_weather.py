@@ -27,7 +27,7 @@ def process_weather_data(responses):
                     end=pd.to_datetime(response.Hourly().TimeEnd(), unit="s", utc=True),
                     freq=pd.Timedelta(seconds=response.Hourly().Interval()),
                     inclusive="left"
-                ).strftime('%Y-%m-%d %H:%M:%S').tolist(),  # Convert to string for JSON compatibility
+                ),
                 "temperature_2m": response.Hourly().Variables(0).ValuesAsNumpy().tolist(),
                 "relative_humidity_2m": response.Hourly().Variables(1).ValuesAsNumpy().tolist(),
                 "precipitation": response.Hourly().Variables(2).ValuesAsNumpy().tolist(),
@@ -62,4 +62,4 @@ responses = fetch_openmeteo_data(url, params)
 all_data = process_weather_data(responses)      
 
 # Write data to files 
-write_to_files(all_data, 'multi_city_weather_forecast.json', 'multi_city_weather_forecast.csv')     
+write_to_files(all_data, 'weather')     

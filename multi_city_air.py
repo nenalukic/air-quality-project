@@ -29,7 +29,7 @@ def process_air_quality_data(responses):
                     end=pd.to_datetime(response.Hourly().TimeEnd(), unit="s", utc=True),
                     freq=pd.Timedelta(seconds=response.Hourly().Interval()),
                     inclusive="left"
-                ).strftime('%Y-%m-%d %H:%M:%S').tolist(),  # Convert to string for JSON compatibility
+                ),
                 "pm10": response.Hourly().Variables(0).ValuesAsNumpy().tolist(),
                 "pm2_5": response.Hourly().Variables(1).ValuesAsNumpy().tolist(),
                 "dust": response.Hourly().Variables(2).ValuesAsNumpy().tolist(),
@@ -68,4 +68,4 @@ responses = fetch_openmeteo_data(url, params)
 all_data = process_air_quality_data(responses)          
 
 # Write data to files
-write_to_files(all_data, 'multi_city_air_quality.json', 'multi_city_air_quality.csv')       
+write_to_files(all_data, 'air_quality')       

@@ -72,10 +72,8 @@ def write_to_files(data, csv_filename):
     # Get current date and time for file naming
     current_datetime = datetime.now().strftime('%Y-%m-%d')
 
-    # Define the prefix for CSV file names
-    csv_filename_prefix = "weather"
     # Create unique CSV file name with current date and time
-    csv_filename = f"{csv_filename_prefix}-{current_datetime}.csv"
+    csv_filename = f"{csv_filename}-{current_datetime}.csv"
     # Write to CSV file
     combined_df.to_csv(csv_filename, index=False)
 

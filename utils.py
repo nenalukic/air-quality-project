@@ -3,7 +3,8 @@ import requests_cache
 import requests
 import pandas as pd
 from retry_requests import retry
-import json
+from datetime import datetime
+#import json
 
 # Selecting cities from different parts of Spain to observe potential variations 
 # in weather patterns
@@ -75,7 +76,7 @@ def get_city_name(latitude, longitude):
         print(f"Failed to retrieve city name for coordinates ({latitude}, {longitude})")
         return "Unknown"
 
-def write_to_files(data, json_filename, csv_filename):
+def write_to_files(data, csv_filename):
     """
     Function to write processed weather forecast data to JSON and CSV files.
 
@@ -85,8 +86,8 @@ def write_to_files(data, json_filename, csv_filename):
         csv_filename (str): Filename for the CSV output file.
     """
     # Write to JSON file
-    with open(json_filename, 'w') as json_file:
-        json.dump(data, json_file)
+    #with open(json_filename, 'w') as json_file:
+        #json.dump(data, json_file)
 
     # Combine data for all cities into a single DataFrame
     combined_data = []
@@ -99,7 +100,14 @@ def write_to_files(data, json_filename, csv_filename):
         combined_data.append(city_df)
     combined_df = pd.concat(combined_data, ignore_index=True)
 
+    # Get current date and time for file naming
+    current_datetime = datetime.now().strftime('%Y-%m-%d')
+
+    # Create unique CSV file name with current date and time
+    csv_filename = f"{csv_filename}-{current_datetime}.csv"
+
     # Write combined DataFrame to a CSV file
     combined_df.to_csv(csv_filename, index=False)
 
-    print(f"Data written to {json_filename} and {csv_filename}")            
+    print(f"Data written to {csv_filename}")
+    print(combined_df.info())            
