@@ -3,7 +3,6 @@ import requests_cache
 import requests
 import pandas as pd
 from retry_requests import retry
-import json
 from datetime import datetime
 
 def fetch_weather_data(url, params):
@@ -51,7 +50,7 @@ def process_weather_data(responses):
                     end=pd.to_datetime(response.Hourly().TimeEnd(), unit="s", utc=True),
                     freq=pd.Timedelta(seconds=response.Hourly().Interval()),
                     inclusive="left"
-                ).strftime('%Y-%m-%d %H:%M:%S').tolist(),  # Convert to string for JSON compatibility
+                ),
                 "temperature_2m": response.Hourly().Variables(0).ValuesAsNumpy().tolist()
             }
         }
@@ -59,10 +58,7 @@ def process_weather_data(responses):
     
     return all_data
 
-def write_to_files(data, json_filename, csv_filename):
-    # Write to JSON file
-    with open(json_filename, 'w') as json_file:
-        json.dump(data, json_file)
+def write_to_files(data, csv_filename):
 
     # Combine data for all cities into a single DataFrame
     combined_data = []
@@ -83,8 +79,7 @@ def write_to_files(data, json_filename, csv_filename):
     # Write to CSV file
     combined_df.to_csv(csv_filename, index=False)
 
-    print(f"Data written to {json_filename} and {csv_filename}")
-    print(combined_df)
+    print(f"Data written to {csv_filename}")
 
 # Example usage
 cities = [
@@ -104,4 +99,4 @@ params = [{"latitude": city["latitude"], "longitude": city["longitude"],
 
 responses = fetch_weather_data(url, params)
 all_data = process_weather_data(responses)
-write_to_files(all_data, 'multi_city_weather_forecast_test.json', 'weather')
+write_to_files(all_data, 'weather')
