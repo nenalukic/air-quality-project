@@ -19,7 +19,6 @@ def process_air_quality_data(responses):
         city_name = get_city_name(response.Latitude(), response.Longitude())
         city_data = {
             "city": city_name,
-            "city": f"{response.Latitude()}°N {response.Longitude()}°E",
             "elevation": response.Elevation(),
             "timezone": f"{response.Timezone()} {response.TimezoneAbbreviation()}",
             "utc_offset": response.UtcOffsetSeconds(),
@@ -58,7 +57,8 @@ params = [{"latitude": city["latitude"], "longitude": city["longitude"],
                     "birch_pollen", "grass_pollen", "mugwort_pollen", "olive_pollen", "ragweed_pollen",
                     "european_aqi"],
         "timezone": "Europe/Berlin",
-        "forecast_days": 7}
+	    "past_days": 92,
+	    "forecast_days": 3}
         for city in cities]         
 
 # Fetch weather forecast data
@@ -68,4 +68,4 @@ responses = fetch_openmeteo_data(url, params)
 all_data = process_air_quality_data(responses)          
 
 # Write data to files
-write_to_files(all_data, 'air_quality')       
+write_to_files(all_data, 'air-quality')       

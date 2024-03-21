@@ -13,8 +13,8 @@ cities = [
     {"latitude": 36.7202, "longitude": -4.4203},  # Malaga (Southern Spain)
     {"latitude": 40.4165, "longitude": -3.7026},  # Madrid (Central Spain)
     {"latitude": 43.2627, "longitude": -2.9253},  # Bilbao (Northern Spain)
-    {"latitude": 41.3888, "longitude": 2.159},    # Barcelona (Eastern Spain)
-    {"latitude": 42.6, "longitude": -5.5703,}     # León (Northwestern Spain)
+    {"latitude": 41.3888, "longitude": 2.159}     # Barcelona (Eastern Spain)
+    #{"latitude": 42.6, "longitude": -5.5703,}     # León (Northwestern Spain)
     
 ]
 

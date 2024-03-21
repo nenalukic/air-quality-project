@@ -52,7 +52,9 @@ url = "https://api.open-meteo.com/v1/forecast"
 # Parameters for fetching weather forecast data
 params = [{"latitude": city["latitude"], "longitude": city["longitude"],
         "hourly": ["temperature_2m", "relative_humidity_2m", "precipitation", "rain", "showers",
-                    "surface_pressure", "cloud_cover", "visibility", "wind_speed_10m", "wind_gusts_10m"]}
+                    "surface_pressure", "cloud_cover", "visibility", "wind_speed_10m", "wind_gusts_10m"],
+        "past_days": 92,
+	    "forecast_days": 3}
         for city in cities]         
 
 # Fetch weather forecast data

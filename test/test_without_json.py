@@ -51,7 +51,7 @@ def process_weather_data(responses):
                     freq=pd.Timedelta(seconds=response.Hourly().Interval()),
                     inclusive="left"
                 ),
-                "temperature_2m": response.Hourly().Variables(0).ValuesAsNumpy().tolist()
+                "uv_index": response.Hourly().Variables(0).ValuesAsNumpy().tolist()
             }
         }
         all_data.append(city_data)
@@ -85,16 +85,16 @@ cities = [
     {"latitude": 40.4165, "longitude": -3.7026},  # Madrid
     {"latitude": 43.2627, "longitude": -2.9253},  # Bilbao
     {"latitude": 41.3888, "longitude": 2.159},  # Barcelona
-    {"latitude": 42.6, "longitude": -5.5703,}  # Castille de Leon
+    {"latitude": 42.6, "longitude": -5.5703,}  # León
     # Add more cities as needed
 ]
 
 url = "https://api.open-meteo.com/v1/forecast"
 params = [{"latitude": city["latitude"], "longitude": city["longitude"],
-        "hourly": ["temperature_2m"],
+        "hourly": ["uv_index"],
         "forecast_days": 1}
         for city in cities]
 
 responses = fetch_weather_data(url, params)
 all_data = process_weather_data(responses)
-write_to_files(all_data, 'weather')
+write_to_files(all_data, 'air-quality')
