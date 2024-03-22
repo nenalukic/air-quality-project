@@ -16,7 +16,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "data-lake-bucket" {
-  name          = var.weather-historical-data
+  name          = var.weather-historical-data-bucket
   location      = var.location
 
   # Optional, but recommended settings:
@@ -34,7 +34,7 @@ resource "google_storage_bucket" "data-lake-bucket" {
   }
 }
 resource "google_storage_bucket" "data-lake-bucket_new" {
-  name          = var.weather-new-data
+  name          = var.weather-new-data-bucket
   location      = var.location
 
   # Optional, but recommended settings:
