@@ -29,10 +29,16 @@ variable "bq_dataset_name" {
   default     = "air_quality"
 }
 
-variable "gcs_bucket_name" {
-  description = "My Storage Bucket Name"
+variable "gcs_bucket_name" "weather-historical-data"{
+  description = "My Storage Bucket for historical data"
   #Update the below to a unique bucket name
-  default     = "air-quality-project-417718-bucket"
+  default     = "air-quality-project-417718-historical_data_bucket"
+}
+
+variable "gcs_bucket_name" "weather-new-data" {
+  description = "My Storage Bucket for new data"
+  #Update the below to a unique bucket name
+  default     = "air-quality-project-417718-new_data_bucket"
 }
 
 variable "gcs_storage_class" {

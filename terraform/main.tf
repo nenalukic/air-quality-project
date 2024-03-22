@@ -15,9 +15,26 @@ provider "google" {
   region  = var.region
 }
 
- 
 resource "google_storage_bucket" "data-lake-bucket" {
-  name          = var.gcs_bucket_name
+  name          = var.weather-historical-data
+  location      = var.location
+
+  # Optional, but recommended settings:
+  storage_class = "STANDARD"
+  uniform_bucket_level_access = true
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+        }
+  }
+}
+resource "google_storage_bucket" "data-lake-bucket_new" {
+  name          = var.weather-new-data
   location      = var.location
 
   # Optional, but recommended settings:
