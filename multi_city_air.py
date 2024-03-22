@@ -48,7 +48,7 @@ def process_air_quality_data(responses):
     
     return all_data
 
-
+# Base URL for air quality API
 url = "https://air-quality-api.open-meteo.com/v1/air-quality"
 
 # Parameters for fetching air quality data
@@ -61,10 +61,10 @@ params = [{"latitude": city["latitude"], "longitude": city["longitude"],
 	    "forecast_days": 3}
         for city in cities]         
 
-# Fetch weather forecast data
+# Fetch air quality data
 responses = fetch_openmeteo_data(url, params)         
 
-# Process weather forecast data
+# Process air quality data
 all_data = process_air_quality_data(responses)          
 
 # Write data to files

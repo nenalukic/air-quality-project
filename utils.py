@@ -78,16 +78,12 @@ def get_city_name(latitude, longitude):
 
 def write_to_files(data, csv_filename):
     """
-    Function to write processed weather forecast data to JSON and CSV files.
+    Function to write processed weather forecast data to CSV files.
 
     Parameters:
         data (list): Processed weather forecast data for all locations.
-        json_filename (str): Filename for the JSON output file.
         csv_filename (str): Filename for the CSV output file.
     """
-    # Write to JSON file
-    #with open(json_filename, 'w') as json_file:
-        #json.dump(data, json_file)
 
     # Combine data for all cities into a single DataFrame
     combined_data = []
