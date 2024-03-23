@@ -11,21 +11,21 @@ spark = SparkSession.builder \
 
 # Define schema for pollen data
 air_quality_schema = types.StructType([
-    types.StructType("date", types.DateType(), True),
-    types.StructType("pm10", types.DoubleType(), True),
-    types.StructType("pm2_5", types.DoubleType(), True),
-    types.StructType("dust", types.DoubleType(), True),
-    types.StructType("uv_index", types.DoubleType(), True),
-    types.StructType("uv_index_clear_sky", types.DoubleType(), True),
-    types.StructType("ammonia", types.DoubleType(), True),
-    types.StructType("alder_pollen", types.DoubleType(), True),
-    types.StructType("birch_pollen", types.DoubleType(), True),
-    types.StructType("grass_pollen", types.DoubleType(), True),
-    types.StructType("mugwort_pollen", types.DoubleType(), True),
-    types.StructType("olive_pollen", types.DoubleType(), True),
-    types.StructType("ragweed_pollen", types.DoubleType(), True),
-    types.StructType("european_aqi", types.DoubleType(), True),
-    types.StructType("city", types.StringType(), True)
+    types.StructField("date", types.DateType(), True),
+    types.StructField("pm10", types.DoubleType(), True),
+    types.StructField("pm2_5", types.DoubleType(), True),
+    types.StructField("dust", types.DoubleType(), True),
+    types.StructField("uv_index", types.DoubleType(), True),
+    types.StructField("uv_index_clear_sky", types.DoubleType(), True),
+    types.StructField("ammonia", types.DoubleType(), True),
+    types.StructField("alder_pollen", types.DoubleType(), True),
+    types.StructField("birch_pollen", types.DoubleType(), True),
+    types.StructField("grass_pollen", types.DoubleType(), True),
+    types.StructField("mugwort_pollen", types.DoubleType(), True),
+    types.StructField("olive_pollen", types.DoubleType(), True),
+    types.StructField("ragweed_pollen", types.DoubleType(), True),
+    types.StructField("european_aqi", types.DoubleType(), True),
+    types.StructField("city", types.StringType(), True)
     # Add more fields as needed
 ])
 
@@ -38,8 +38,10 @@ airquality_df = spark.read \
 # Convert date string to date type
 airquality_df = airquality_df.withColumn("date", to_date("date"))
 
+airquality_df.show()
+
 # Partition pollen data by day
-airquality_df.write.partitionBy("date").parquet("airquality_partitioned")
+airquality_df.write.partitionBy("date").parquet("airquality_historical_partitioned")
 
 # Stop Spark session
 spark.stop()

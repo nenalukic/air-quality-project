@@ -166,3 +166,7 @@ data/
 *.json
 
 .cache.sqlite
+
+airquality_historical_partitioned/
+
+weather_historical_partitioned/

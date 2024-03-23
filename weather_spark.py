@@ -11,18 +11,18 @@ spark = SparkSession.builder \
 
 # Define schema for pollen data
 weather_schema = types.StructType([
-    types.StructType("date", types.DateType(), True),
-    types.StructType("temperature_2m", types.DoubleType(), True),
-    types.StructType("relative_humidity_2m", types.DoubleType(), True),
-    types.StructType("precipitation", types.DoubleType(), True),
-    types.StructType("rain", types.DoubleType(), True),
-    types.StructType("showers", types.DoubleType(), True),
-    types.StructType("surface_pressure", types.DoubleType(), True),
-    types.StructType("cloud_cover", types.DoubleType(), True),
-    types.StructType("visibility", types.DoubleType(), True),
-    types.StructType("wind_speed_10m", types.DoubleType(), True),
-    types.StructType("wind_gusts_10m", types.DoubleType(), True),
-    types.StructType("city", types.StringType(), True)
+    types.StructField("date", types.DateType(), True),
+    types.StructField("temperature_2m", types.DoubleType(), True),
+    types.StructField("relative_humidity_2m", types.DoubleType(), True),
+    types.StructField("precipitation", types.DoubleType(), True),
+    types.StructField("rain", types.DoubleType(), True),
+    types.StructField("showers", types.DoubleType(), True),
+    types.StructField("surface_pressure", types.DoubleType(), True),
+    types.StructField("cloud_cover", types.DoubleType(), True),
+    types.StructField("visibility", types.DoubleType(), True),
+    types.StructField("wind_speed_10m", types.DoubleType(), True),
+    types.StructField("wind_gusts_10m", types.DoubleType(), True),
+    types.StructField("city", types.StringType(), True)
     # Add more fields as needed
 ])
 
@@ -35,8 +35,10 @@ weather_df = spark.read \
 # Convert date string to date type
 weather_df = weather_df.withColumn("date", to_date("date"))
 
+weather_df.show()
+
 # Partition weather data by day
-weather_df.write.partitionBy("date").parquet("weather_data_partitioned")
+weather_df.write.partitionBy("date").parquet("weather_historical_partitioned")
 
 # Stop Spark session
 spark.stop()
