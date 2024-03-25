@@ -22,7 +22,9 @@ weather_schema = types.StructType([
     types.StructField("visibility", types.DoubleType(), True),
     types.StructField("wind_speed_10m", types.DoubleType(), True),
     types.StructField("wind_gusts_10m", types.DoubleType(), True),
-    types.StructField("city", types.StringType(), True)
+    types.StructField("city", types.StringType(), True),
+    # Add timestamp column to schema
+    types.StructField("timestamp", types.TimestampType(), True)
     # Add more fields as needed
 ])
 

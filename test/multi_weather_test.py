@@ -51,7 +51,7 @@ def process_weather_data(responses):
                     end=pd.to_datetime(response.Hourly().TimeEnd(), unit="s", utc=True),
                     freq=pd.Timedelta(seconds=response.Hourly().Interval()),
                     inclusive="left"
-                ).strftime('%Y-%m-%d %H:%M:%S').tolist(),  # Convert to string for JSON compatibility
+                ),
                 "temperature_2m": response.Hourly().Variables(0).ValuesAsNumpy().tolist()
             }
         }
@@ -59,10 +59,7 @@ def process_weather_data(responses):
     
     return all_data
 
-def write_to_files(data, json_filename, csv_filename):
-    # Write to JSON file
-    with open(json_filename, 'w') as json_file:
-        json.dump(data, json_file)
+def write_to_files(data, csv_filename):
 
     # Combine data for all cities into a single DataFrame
     combined_data = []
@@ -74,16 +71,14 @@ def write_to_files(data, json_filename, csv_filename):
     combined_df = pd.concat(combined_data, ignore_index=True)
 
     # Get current date and time for file naming
-    current_datetime = datetime.now().strftime('%Y-%m-%d')
+    current_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    combined_df["current_datetime"] = current_datetime
 
-    # Define the prefix for CSV file names
-    csv_filename_prefix = "weather"
-    # Create unique CSV file name with current date and time
-    csv_filename = f"{csv_filename_prefix}-{current_datetime}.csv"
+    csv_filename = f"{csv_filename}-{current_datetime}.csv"
     # Write to CSV file
     combined_df.to_csv(csv_filename, index=False)
 
-    print(f"Data written to {json_filename} and {csv_filename}")
+    print(f"Data written to {csv_filename}")
     print(combined_df)
 
 # Example usage
@@ -104,4 +99,4 @@ params = [{"latitude": city["latitude"], "longitude": city["longitude"],
 
 responses = fetch_weather_data(url, params)
 all_data = process_weather_data(responses)
-write_to_files(all_data, 'multi_city_weather_forecast_test.json', 'weather')
+write_to_files(all_data, 'weather')

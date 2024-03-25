@@ -19,6 +19,8 @@ aggregated_df = data_df.groupBy("date", "city").agg(
     *(format_number(max(col), 2).alias(f"max_{col}") for col in aggregate_cols)   # Compute maximum for every column
 )
 
+aggregated_df.show()
+
 # Write the aggregated DataFrame to a new Parquet file
 aggregated_df.write.parquet("aggregated_air_quality_historical_data")
 
