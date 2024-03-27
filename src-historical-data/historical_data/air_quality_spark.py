@@ -44,7 +44,7 @@ def process_air_quality_data(csv_path, output_path):
         .csv(csv_path)
 
     # Convert date string to date type
-    air_quality_df = air_quality_df.withColumn("date", to_date("date"))
+    air_quality_df = air_quality_df.withColumn("date", to_date("event_date"))
 
     # Show loaded data
     air_quality_df.show()
@@ -52,7 +52,7 @@ def process_air_quality_data(csv_path, output_path):
     air_quality_df.printSchema()
 
     # Partition air quality data by day
-    air_quality_df.write.partitionBy("date").parquet(output_path)
+    air_quality_df.write.partitionBy("event_date").parquet(output_path)
 
     # Stop Spark session
     spark.stop()

@@ -97,8 +97,11 @@ def write_to_files(data, csv_filename):
     combined_df = pd.concat(combined_data, ignore_index=True)
 
     # Get current date and time for file naming
-    current_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    #current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    current_datetime = pd.Timestamp.now()
     combined_df["current_datetime"] = current_datetime
+    event_date = combined_df['date'].dt.date
+    combined_df["event_date"] = pd.to_datetime(event_date)
 
     # Create unique CSV file name with current date and time
     csv_filename = f"{csv_filename}-{current_datetime}.csv"

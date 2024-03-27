@@ -35,12 +35,12 @@ weather_df = spark.read \
     .csv('weather-2024-03-21.csv')
 
 # Convert date string to date type
-weather_df = weather_df.withColumn("date", to_date("date"))
+weather_df = weather_df.withColumn("date", to_date("event_date"))
 
 weather_df.show()
 
 # Partition weather data by day
-weather_df.write.partitionBy("date").parquet("weather_historical_partitioned")
+weather_df.write.partitionBy("event_date").parquet("weather_historical_partitioned")
 
 # Stop Spark session
 spark.stop()

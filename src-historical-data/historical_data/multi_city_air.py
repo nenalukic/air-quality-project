@@ -57,8 +57,8 @@ params = [{"latitude": city["latitude"], "longitude": city["longitude"],
                     "birch_pollen", "grass_pollen", "mugwort_pollen", "olive_pollen", "ragweed_pollen",
                     "european_aqi"],
         "timezone": "Europe/Berlin",
-	    "past_days": 92,
-	    "forecast_days": 3}
+	    "start_date": "2023-12-01",
+	    "end_date": "2024-03-31"}
         for city in cities]         
 
 # Fetch air quality data

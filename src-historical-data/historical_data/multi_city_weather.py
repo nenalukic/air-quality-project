@@ -53,8 +53,8 @@ url = "https://api.open-meteo.com/v1/forecast"
 params = [{"latitude": city["latitude"], "longitude": city["longitude"],
         "hourly": ["temperature_2m", "relative_humidity_2m", "precipitation", "rain", "showers",
                     "surface_pressure", "cloud_cover", "visibility", "wind_speed_10m", "wind_gusts_10m"],
-        "past_days": 92,
-	    "forecast_days": 3}
+        "start_date": "2023-12-01",
+	    "end_date": "2024-03-31"}
         for city in cities]         
 
 # Fetch weather forecast data
