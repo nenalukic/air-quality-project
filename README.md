@@ -29,13 +29,17 @@ The application uses the data from [Open-Meteo](https://open-meteo.com/) by read
 1. [Air Quality API](https://open-meteo.com/en/docs/air-quality-api) and 
 2. [Weather Forecast API](https://open-meteo.com/en/docs) 
 
-Pipeline description:
+**Pipeline description:**
 - Pipeline fetches the data from APIs
 - Then it transforms both data sets and uploads them to Google Cloud Storage. 
 - In the next step this data is loaded from GCS into BigQuery.
 - There we create a couple of tables with aggregated data. 
 
 All steps are orchestrated in [Mage](https://docs.mage.ai/introduction/overview).
+
+**Problem**:
+
+**Weather and Air Quality Aggregator**: Collecting historical and forecast data from multiple sources, aggregate this data to analyze trends over time and provide a comprehensive forecast for different regions.
 
 ---
 
