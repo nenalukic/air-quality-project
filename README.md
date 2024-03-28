@@ -9,6 +9,15 @@
 - [Facts about Pollen](#facts-about-pollen)
 - [Air Quality and Pollen](#air-quality-and-pollen)
 
+<table><tr>
+<td> <img src="images/airquality-report.png" width="450"/> </td>
+<td> <img src="images/weather-airquality-report.png" width="450"/> </td>
+<tr>
+<td>Air Quality Report 1</td>
+<td>Air Quality Report 2</td>
+</tr>
+</tr></table>
+
 
 ## Project Description
 This project contains an end-to-end data pipeline written in Python. 
