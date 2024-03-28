@@ -77,7 +77,7 @@ give it exactly the name `my-airquality-credentials.json`.
 
 1. Clone this repository
 2. `cd` into the terraform directory. We are using **terraform** to create google cloud resorces. 
-    My resources are created for region **EU**. If needed, you can change it in **varibales.tf** file. In this file you need to change the **project ID** to the project ID you created in GCP.
+    My resources are created for region **EU**. If needed, you can change it in **variables.tf** file. In this file you need to change the **project ID** to the project ID you created in GCP.
 3. To prepare your working directory for other commands we are using:
 
 ```bash
