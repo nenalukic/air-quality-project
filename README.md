@@ -1,10 +1,11 @@
 # Air Quality Project
 
-- [Welcome](#welcome)
+- [Project Description](#project-description)
 - [Prerequisites](#prerequisites)
-- [Setup](#setup)
-- [Creating Visualisations](#creating-visualisations)
+- [Setting up GCP](#setting-up-gcp)
 - [Running the Code](#running-the-code)
+- [Creating Pipeline in Mage.AI](#creating-pipeline-in-mageai)
+- [Creating Visualisations](#creating-visualisations)
 - [Facts about Pollen](#facts-about-pollen)
 - [Air Quality and Pollen](#air-quality-and-pollen)
 
@@ -152,7 +153,6 @@ This repository should have the following structure:
 
 <img src="images/mage-find-pipelines.png" width="150" />
 <br>
-<br>
 
 ## Creating Pipeline in Mage.AI
 
@@ -214,3 +214,5 @@ As a general observation, most aeropalynology studies indicate that temperature 
 Urban areas tend to have lower pollen counts than the countryside, but pollen can combine with air pollution in the city center and bring on hay fever symptoms. It’s not just in the summer months either; it can peak as early as April and May.
 
 <img src="images/airquality-counts-scale.png" width="450" />
+
+[Home](#air-quality-project)
