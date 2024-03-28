@@ -141,7 +141,6 @@ This repository should have the following structure:
 <td> <img src="images/mage-find-pipelines.png" style="width: 150px;/> </td>
 
 ---
-
 In this pipeline you need to create blocks. From the repo in pipeline folder copy files in the next order:
 
 ```
