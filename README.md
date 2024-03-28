@@ -21,11 +21,12 @@ The application uses the data from [Open-Meteo](https://open-meteo.com/) by read
 2. [Weather Forecast API](https://open-meteo.com/en/docs) 
 
 Pipeline description:
-
-- Pipeline transforms both data sets and uploads them to Google Cloud Storage. 
+- Pipeline fetches the data from APIs
+- Then it transforms both data sets and uploads them to Google Cloud Storage. 
 - In the next step this data is loaded from GCS into BigQuery.
 - There we create a couple of tables with aggregated data. 
-- All steps are orchestrated in [Mage](https://docs.mage.ai/introduction/overview).
+
+All steps are orchestrated in [Mage](https://docs.mage.ai/introduction/overview).
 
 ---
 
