@@ -167,27 +167,30 @@ In this pipeline you need to create blocks. From the repo in pipeline folder cop
 When you are done, in a google bucket you should have two CSV files and in the BigQuery you should have all tables. Your pipeline shoul look like this:
 
 
-<td> <img src="images/mage-workflow.png" style="width: 450px;/> </td>
+<img src="images/mage-workflow.png" width="450" />
 
----
+<br>
+<br>
+
 ## Creating Visualisations
 
-With your google account, log in at [Google looker studio](https://lookerstudio.google.com/navigation/reporting)
+- With your google account, log in at [Google looker studio](https://lookerstudio.google.com/navigation/reporting)
 
-Connect your dataset using the Big Query Connector
+- Connect your dataset using the Big Query Connector
 
 - Select your project name then select the dataset. This would bring you to the dashboard page
 
-Create your visualizations and share.
+- Create your visualizations and share.
 
----
+<br>
+
 ## Facts about Pollen
 
 A pollen count is the measurement of the number of grains of pollen in a cubic meter of air. High pollen counts can sometimes lead to increased rates of allergic reactions for those with allergic disorders.
 
 Pollen, a fine to coarse powdery substance, is created by certain plants as part of their reproduction process. It can appear from trees in the spring, grasses in the summer, and weeds in the fall. Interestingly, pollen from flowers doesn’t usually contribute to nasal allergy symptoms.
 
-<td> <img src="images/pollen-counts-scale.png" style="width: 450px;/> </td>
+<img src="images/pollen-counts-scale.png" width="450" />
 
 ---
 
@@ -198,4 +201,4 @@ As a general observation, most aeropalynology studies indicate that temperature 
 
 Urban areas tend to have lower pollen counts than the countryside, but pollen can combine with air pollution in the city center and bring on hay fever symptoms. It’s not just in the summer months either; it can peak as early as April and May.
 
-<td> <img src="images/airquality-counts-scale.png" style="width: 450px;/> </td>
+<img src="images/airquality-counts-scale.png" width="450" />
