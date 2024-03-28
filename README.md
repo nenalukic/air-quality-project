@@ -1,4 +1,4 @@
-# air-quality-project
+# Air Quality Project
 
 - [Welcome](#welcome)
 - [Prerequisites](#prerequisites)
@@ -6,12 +6,15 @@
 - [Creating Visualisations](#creating-visualisations)
 - [Running the Code](#running-the-code)
 - [Facts about Pollen](#facts-about-pollen)
+- [Air Quality and Pollen](#air-quality-and-pollen)
 
 
 # Welcome
 This project contains an end-to-end data pipeline, written in Python. It is my final project for [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp#data-engineering-zoomcamp) in the 2024 Cohort. 
 
 The application reads from [Open-Meteo](https://open-meteo.com/) two APIs. One is [Air Quality API](https://open-meteo.com/en/docs/air-quality-api) and second is [Weather Forecast API](https://open-meteo.com/en/docs), transforms it and uploads it to Google Cloud Storage. Then it is loaded from GCS into BigQuery and created a few tables, all orchestrated in [Mage](https://docs.mage.ai/introduction/overview).
+
+---
 
 ## Prerequisites
 1. [Docker](https://docs.docker.com/engine/install/)
@@ -54,49 +57,115 @@ give it exactly the name `my-airquality-credentials.json`.
 4. This application communicates with several APIs. Make sure you have enabled the BigQuery API.
 - Go to [BigQuery API](https://console.cloud.google.com/apis/library/browse?hl=sv&project=air-quality-project-417718&q=bigquery%20api) and enable it.
 
-
+---
 ## Running the Code
 *Note: these instructions are used for macOS/Linux/WSL, for Windows it may differ*
 
 1. Clone this repository
-2. `cd` into the mage directory
-3. Rename `dev.env` to simply `.env`.
-
-4. Now, let's build the container
-
-```bash
-docker compose build
-```
-
-5. Finally, start the Docker container:
-
-```bash
-docker compose up
-```
-
-6. We just initialized a mage repository. It is present in your project under the name `air-quality`. Now, navigate to http://localhost:6789 in your browser!
-
-7. It's time to create google cloud resorces. For that, we are using **terraform**. My resources are created for region **EU**. If needed, you can change it in **varibales.tf** file. In this file you need to change the project ID to the project ID you created.
-
-   `cd` into the terraform directory and to prepare your working directory for other commands we are using:
+2. `cd` into the terraform directory. We are using **terraform** to create google cloud resorces. 
+    My resources are created for region **EU**. If needed, you can change it in **varibales.tf** file. In this file you need to change the **project ID** to the project ID you created in GCP.
+3. To prepare your working directory for other commands we are using:
 
 ```bash
 terraform init
 ```
-8. To create or update infrastructure we are using:
+4. To Show changes required by the current configuration you can run:
+
+```bash
+terraform plan
+```
+5. To create or update infrastructure we are using:
 
 ```bash
 terraform apply
 ```
-9. To destroy previously-created infrastructure we are using:
+6. To destroy previously-created infrastructure we are using:
 
 ```bash
 terraform destroy
 ```
- **IMPORTANT**: This line uses when you are done with the whole project. 
+**IMPORTANT**: This line uses when you are done with the whole project.
 
-10. Time to work with mage. Go to the browser and in the folder **pipeline** you will find pipeline named **air_quality_api**. Run it. After it finished running the all blocks in a google bucket you should have two CSV files and in the BigQuery you should have all tables.
+7. `cd` into the mage directory
+8. Rename `dev.env` to simply `.env`— this will ensure the file is not committed to Git by accident, since it will contain credentials in the future.
 
+9. Now, let's build the container
+
+```bash
+docker compose build
+```
+10. Finally, start the Docker container:
+
+```bash
+docker compose up
+```
+11. We just initialized a mage repository. It is present in your project under the name `air-quality`. Now, navigate to http://localhost:6789 in your browser! 
+
+This repository should have the following structure:
+
+```
+.
+├── mage_data
+│   └── air-quality
+├── air-quality
+│   ├── __pycache__
+│   ├── charts
+│   ├── custom
+│   ├── data_exporters
+│   ├── data_loaders
+│   ├── dbt
+│   ├── extensions
+│   ├── interactions
+│   ├── pipelines
+│   ├── scratchpads
+│   ├── transformers
+│   ├── utils
+│   ├── __init__.py
+│   ├── io_config.yaml
+│   ├── metadata.yaml
+│   └── requirements.txt
+├── .gitignore
+├── dev.env
+├── docker-compose.yml
+├── Dockerfile
+└── requirements.txt
+```
+**IMPORTANT**-Inside of mage you will find file called **io_config.yaml** .Inside this file scroll down to the line GOOGLE_SERVICE_ACC_KEY_FILEPATH and write this line "/home/src/my-airquality-credentials.json" Everything else you can comment like in the photo below.
+
+<td> <img src="images/google-cred-mage.png" style="width: 450px;/> </td>
+
+---
+
+10. Time to work with mage. Go to the browser, find **pipelines** and create a new pipeline. 
+
+<td> <img src="images/mage-find-pipelines.png" style="width: 150px;/> </td>
+
+---
+
+In this pipeline you need to create blocks. From the repo in pipeline folder copy files in the next order:
+
+```
+├── pipeline
+│   ├── api_air_quality_load_.py                    (Python, Data Loader)
+│   ├── air_api__to_gcs.py                          (Python, Data Exporter)
+│   ├── air_csv_to_bigquery.py                      (Python, Data Exporter)
+│   ├── create_air_quality_partition_table.sql      (SQL, Transformer)
+│   ├── air_aggregation.sql                         (SQL, Transformer)
+│   ├── api_weather_load.py                         (Python, Data Loader)
+│   ├── weather_api_to_gcs.py                       (Python, Data Exporter)
+│   ├── weather_csv_to_bigquery_table.py            (Python, Data Exporter)
+│   ├── create_air_quality_partition_table.sql      (SQL, Transformer)
+│   ├── weather_aggregation.sql                     (SQL, Transformer)
+│   ├── joined_tables.sql                           (SQL, Data Exporter)
+
+```
+
+When you are done, in a google bucket you should have two CSV files and in the BigQuery you should have all tables. Your pipeline shoul look like this:
+
+
+<td> <img src="images/mage-workflow.png" style="width: 450px;/> </td>
+
+---
 ## Creating Visualisations
 
 With your google account, log in at [Google looker studio](https://lookerstudio.google.com/navigation/reporting)
@@ -107,14 +176,22 @@ Connect your dataset using the Big Query Connector
 
 Create your visualizations and share.
 
+---
 ## Facts about Pollen
 
 A pollen count is the measurement of the number of grains of pollen in a cubic meter of air. High pollen counts can sometimes lead to increased rates of allergic reactions for those with allergic disorders.
 
 Pollen, a fine to coarse powdery substance, is created by certain plants as part of their reproduction process. It can appear from trees in the spring, grasses in the summer, and weeds in the fall. Interestingly, pollen from flowers doesn’t usually contribute to nasal allergy symptoms.
 
+<td> <img src="images/pollen-counts-scale.png" style="width: 450px;/> </td>
+
+---
+
 As a general observation, most aeropalynology studies indicate that temperature and wind have a positive correlation with airborne pollen concentrations, while rainfall and humidity are negatively correlated.
 
-## Air quality and pollen.
+---
+## Air Quality and Pollen.
 
 Urban areas tend to have lower pollen counts than the countryside, but pollen can combine with air pollution in the city center and bring on hay fever symptoms. It’s not just in the summer months either; it can peak as early as April and May.
+
+<td> <img src="images/airquality-counts-scale.png" style="width: 450px;/> </td>

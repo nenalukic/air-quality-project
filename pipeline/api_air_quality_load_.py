@@ -141,6 +141,10 @@ def write_to_files(data):
     #current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     current_datetime = pd.Timestamp.now()
     combined_df["current_datetime"] = current_datetime
+    event_date = combined_df['date'].dt.date
+    combined_df["event_date"] = pd.to_datetime(event_date) 
+
+    print(combined_df.dtypes)
 
     # Define schema for the DataFrame
     schema = {
@@ -159,7 +163,8 @@ def write_to_files(data):
         "ragweed_pollen": "float64",
         "european_aqi": "float64",
         "city": "object",
-        "current_datetime": "datetime64[s]"
+        "current_datetime": "datetime64[s]",
+        "event_date": "datetime64[s]"
     }
 
     print(combined_df.info())
@@ -190,8 +195,8 @@ def load_data_from_api(*args, **kwargs):
                         "birch_pollen", "grass_pollen", "mugwort_pollen", "olive_pollen", "ragweed_pollen",
                         "european_aqi"],
             "timezone": "Europe/Berlin",
-            "past_days": 92,
-            "forecast_days": 1}
+            "start_date": "2023-12-01",
+	        "end_date": "2024-03-31"}
             for city in cities]         
 
     # Fetch air quality data
