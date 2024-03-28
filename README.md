@@ -9,10 +9,22 @@
 - [Air Quality and Pollen](#air-quality-and-pollen)
 
 
-# Welcome
-This project contains an end-to-end data pipeline, written in Python. It is my final project for [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp#data-engineering-zoomcamp) in the 2024 Cohort. 
+## Project Description
+This project contains an end-to-end data pipeline written in Python. 
 
-The application reads from [Open-Meteo](https://open-meteo.com/) two APIs. One is [Air Quality API](https://open-meteo.com/en/docs/air-quality-api) and second is [Weather Forecast API](https://open-meteo.com/en/docs), transforms it and uploads it to Google Cloud Storage. Then it is loaded from GCS into BigQuery and created a few tables, all orchestrated in [Mage](https://docs.mage.ai/introduction/overview).
+This was my final project for [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp#data-engineering-zoomcamp) in the 2024 Cohort. 
+
+The application uses the data from [Open-Meteo](https://open-meteo.com/) by reading from two APIs: 
+
+1. [Air Quality API](https://open-meteo.com/en/docs/air-quality-api) and 
+2. [Weather Forecast API](https://open-meteo.com/en/docs) 
+
+Pipeline description:
+
+- Pipeline transforms both data sets and uploads them to Google Cloud Storage. 
+- In the next step this data is loaded from GCS into BigQuery.
+- There we create a couple of tables with aggregated data. 
+- All steps are orchestrated in [Mage](https://docs.mage.ai/introduction/overview).
 
 ---
 
@@ -20,18 +32,18 @@ The application reads from [Open-Meteo](https://open-meteo.com/) two APIs. One i
 1. [Docker](https://docs.docker.com/engine/install/)
 2. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 3. [Terraform](https://developer.hashicorp.com/terraform/install)
+4. Setup a GCP account
 
-# Setup
 Before running the code you need to follow the steps below.
 
-## Setting up GCP
+### Setting up GCP
 Google Cloud is a suite of Cloud Computing services offered by Google that provides various services like compute, storage, networking, and many more. It is organized into Regions and Zones.
 
 Setting up GCP would require a GCP account. A GCP account can be created for free on trial but would still require a credit card to signup.
 
 1. Start by creating a GCP account at [this link](https://cloud.google.com/)
 2. Navigate to the GCP Console and create a new project. Give the project an appropriate name and take note of the project ID.
-3. Create a service account.
+3. Create a service account:
 
    - In the left sidebar, click on "IAM & Admin" and then click on "Service accounts."
 
@@ -132,17 +144,17 @@ This repository should have the following structure:
 ```
 **IMPORTANT**-Inside of mage you will find file called **io_config.yaml** .Inside this file scroll down to the line GOOGLE_SERVICE_ACC_KEY_FILEPATH and write this line "/home/src/my-airquality-credentials.json" Everything else you can comment like in the photo below.
 
-<td> <img src="images/google-cred-mage.png" style="width: 450px;/> </td>
+<img src="images/google-cred-mage.png" width="450"/>
 
 ---
 
-10. Time to work with mage. Go to the browser, find **pipelines** and create a new pipeline. 
+12. Time to work with mage. Go to the browser, find **pipelines** and create a new pipeline. 
 
 <img src="images/mage-find-pipelines.png" width="150" />
 <br>
 <br>
 
-### Creating Pipeline in Mage.AI
+## Creating Pipeline in Mage.AI
 
 In this pipeline you need to create blocks. From the repo in pipeline folder copy files in the next order:
 
@@ -184,7 +196,7 @@ When you are done, in a google bucket you should have two CSV files and in the B
 
 <br>
 
-## Facts about Pollen
+### Facts about Pollen
 
 A pollen count is the measurement of the number of grains of pollen in a cubic meter of air. High pollen counts can sometimes lead to increased rates of allergic reactions for those with allergic disorders.
 
@@ -197,7 +209,7 @@ Pollen, a fine to coarse powdery substance, is created by certain plants as part
 As a general observation, most aeropalynology studies indicate that temperature and wind have a positive correlation with airborne pollen concentrations, while rainfall and humidity are negatively correlated.
 
 ---
-## Air Quality and Pollen.
+### Air Quality and Pollen.
 
 Urban areas tend to have lower pollen counts than the countryside, but pollen can combine with air pollution in the city center and bring on hay fever symptoms. It’s not just in the summer months either; it can peak as early as April and May.
 
