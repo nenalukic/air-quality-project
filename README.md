@@ -138,12 +138,16 @@ This repository should have the following structure:
 
 10. Time to work with mage. Go to the browser, find **pipelines** and create a new pipeline. 
 
-<td> <img src="images/mage-find-pipelines.png" style="width: 150px;/> </td>
+<img src="images/mage-find-pipelines.png" width="150" />
+<br>
+<br>
 
----
+### Creating Pipeline in Mage.AI
+
 In this pipeline you need to create blocks. From the repo in pipeline folder copy files in the next order:
 
 ```
+
 ├── pipeline
 │   ├── api_air_quality_load_.py                    (Python, Data Loader)
 │   ├── air_api__to_gcs.py                          (Python, Data Exporter)
@@ -156,6 +160,7 @@ In this pipeline you need to create blocks. From the repo in pipeline folder cop
 │   ├── create_air_quality_partition_table.sql      (SQL, Transformer)
 │   ├── weather_aggregation.sql                     (SQL, Transformer)
 │   ├── joined_tables.sql                           (SQL, Data Exporter)
+
 
 ```
 
