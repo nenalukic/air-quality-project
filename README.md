@@ -5,6 +5,7 @@
 - [Setup](#setup)
 - [Creating Visualisations](#creating-visualisations)
 - [Running the Code](#running-the-code)
+- [Facts about Pollen](#facts-about-pollen)
 
 
 # Welcome
@@ -106,4 +107,14 @@ Connect your dataset using the Big Query Connector
 
 Create your visualizations and share.
 
+## Facts about Pollen
+
+A pollen count is the measurement of the number of grains of pollen in a cubic meter of air. High pollen counts can sometimes lead to increased rates of allergic reactions for those with allergic disorders.
+
+Pollen, a fine to coarse powdery substance, is created by certain plants as part of their reproduction process. It can appear from trees in the spring, grasses in the summer, and weeds in the fall. Interestingly, pollen from flowers doesn’t usually contribute to nasal allergy symptoms.
+
 As a general observation, most aeropalynology studies indicate that temperature and wind have a positive correlation with airborne pollen concentrations, while rainfall and humidity are negatively correlated.
+
+## Air quality and pollen.
+
+Urban areas tend to have lower pollen counts than the countryside, but pollen can combine with air pollution in the city center and bring on hay fever symptoms. It’s not just in the summer months either; it can peak as early as April and May.
