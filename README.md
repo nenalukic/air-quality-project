@@ -8,14 +8,8 @@
 - [Facts about Pollen](#facts-about-pollen)
 - [Air Quality and Pollen](#air-quality-and-pollen)
 
-<table><tr>
-<td> <img src="images/airquality-report.png" width="450"/> </td>
-<td> <img src="images/weather-airquality-report.png" width="450"/> </td>
-<tr>
-<td>Air Quality Report 1</td>
-<td>Air Quality Report 2</td>
-</tr>
-</tr></table>
+
+<img src="images/project-gif.svg" width="650" />
 
 
 ## Project Description
@@ -210,5 +204,17 @@ As a general observation, most aeropalynology studies indicate that temperature 
 Urban areas tend to have lower pollen counts than the countryside, but pollen can combine with air pollution in the city center and bring on hay fever symptoms. It’s not just in the summer months either; it can peak as early as April and May.
 
 <img src="images/airquality-counts-scale.png" width="450" />
+
+<br >
+
+<table><tr>
+<td> <img src="images/airquality-report.png" width="450"/> </td>
+<td> <img src="images/weather-airquality-report.png" width="450"/> </td>
+<tr>
+<td>Air Quality Report 1</td>
+<td>Air Quality Report 2</td>
+</tr>
+</tr></table>
+
 
 [Home](#air-quality-project)
