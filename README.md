@@ -178,17 +178,19 @@ In this pipeline you need to create blocks. From the repo in pipeline folder cop
 │   ├── api_air_quality_load_.py                    (Python, Data Loader)
 │   ├── air_api__to_gcs.py                          (Python, Data Exporter)
 │   ├── air_csv_to_bigquery.py                      (Python, Data Exporter)
-│   ├── create_air_quality_partition_table.sql      (SQL, Transformer)
+│   ├── create_air_quality_partition_table.sql      (SQL, Data Exporter)
 │   ├── air_aggregation.sql                         (SQL, Transformer)
 │   ├── api_weather_load.py                         (Python, Data Loader)
 │   ├── weather_api_to_gcs.py                       (Python, Data Exporter)
 │   ├── weather_csv_to_bigquery_table.py            (Python, Data Exporter)
-│   ├── create_air_quality_partition_table.sql      (SQL, Transformer)
+│   ├── create_air_quality_partition_table.sql      (SQL, Data Exporter)
 │   ├── weather_aggregation.sql                     (SQL, Transformer)
 │   ├── joined_tables.sql                           (SQL, Data Exporter)
 
 
 ```
+
+**IMPORTANT**: For some reason, an error may occur during the step of creating the 'air_aggregated' table, indicating '404 Not Found: Table air-quality-project-417718:air_quality.air_aggregated_data was not found in location EU.' However, if you navigate to BigQuery and refresh the database, the table should appear.
 
 When you are done, in a google bucket you should have two CSV files and in the BigQuery you should have all tables. Your pipeline shoul look like this:
 
