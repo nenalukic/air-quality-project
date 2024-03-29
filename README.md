@@ -190,13 +190,19 @@ In this pipeline you need to create blocks. From the repo in pipeline folder cop
 
 ```
 
+When creating SQL blocks, select BigQuery and ensure to check 'Use raw SQL"
+
+<img src="images/SQL-block-example.png" width="450" />
+
+<br>
+
+
 **IMPORTANT**: For some reason, an error may occur during the step of creating the 'air_aggregated' table, indicating '404 Not Found: Table air-quality-project-417718:air_quality.air_aggregated_data was not found in location EU.' However, if you navigate to BigQuery and refresh the database, the table should appear.
 
-When you are done, in a google bucket you should have two CSV files and in the BigQuery you should have all tables. Your pipeline shoul look like this:
+When you are done, in a google bucket you should have two CSV files and in the BigQuery you should have all tables. Your pipeline should look like this:
 
 
 <img src="images/mage-workflow.png" width="450" />
-
 <br>
 <br>
 
