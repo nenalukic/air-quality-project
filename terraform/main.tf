@@ -57,5 +57,6 @@ resource "google_bigquery_dataset" "dataset" {
   dataset_id = var.bq_dataset_name
   project    = var.project
   location   = var.location
+  delete_contents_on_destroy=true
 }
 
