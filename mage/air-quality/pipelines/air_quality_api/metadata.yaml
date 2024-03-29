@@ -1,0 +1,253 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - air_api__to_gcs
+  - air_csv_to_bigquery
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: 'api air quality load '
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: api_air_quality_load_
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: data_exporters/air_api__to_gcs.py
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: air_api__to_gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - api_air_quality_load_
+  uuid: air_api__to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - create_air_quality_partition_table
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: air csv to bigquery
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - api_air_quality_load_
+  uuid: air_csv_to_bigquery
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_database: air-quality-project-417718
+    data_provider_profile: default
+    data_provider_schema: air_quality
+    data_provider_table: airquality_partitioned
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks:
+  - air_aggregation
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: create air quality partition table
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - air_csv_to_bigquery
+  uuid: create_air_quality_partition_table
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_database: air-quality-project-417718
+    data_provider_profile: default
+    data_provider_schema: air_quality
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: air aggregation
+  retry_config: null
+  status: failed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - create_air_quality_partition_table
+  uuid: air_aggregation
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: data_loaders/api_weather_load.py
+  downstream_blocks:
+  - weather_api_to_gcs
+  - weather_csv_to_bigquery_table
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: api_weather_load
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: api_weather_load
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: weather api to gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - api_weather_load
+  uuid: weather_api_to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - create_weather_partition_table
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: weather csv to bigquery table
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - api_weather_load
+  uuid: weather_csv_to_bigquery_table
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks:
+  - weather_aggregation
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: create weather partition table
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - weather_csv_to_bigquery_table
+  uuid: create_weather_partition_table
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks:
+  - joined_tables
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: weather aggregation
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - create_weather_partition_table
+  uuid: weather_aggregation
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: joined tables
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - weather_aggregation
+  uuid: joined_tables
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-03-25 12:09:55.322193+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: air quality api
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+updated_at: '2024-03-29 13:16:48'
+uuid: air_quality_api
+variables_dir: /home/src/mage_data/air-quality
+widgets: []
