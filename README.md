@@ -4,7 +4,6 @@
 - [Prerequisites](#prerequisites)
 - [Setting up GCP](#setting-up-gcp)
 - [Running the Code](#running-the-code)
-- [Creating Pipeline in Mage.AI](#creating-pipeline-in-mageai)
 - [Creating Visualisations](#creating-visualisations)
 - [Facts about Pollen](#facts-about-pollen)
 - [Air Quality and Pollen](#air-quality-and-pollen)
