@@ -39,7 +39,7 @@ All steps are orchestrated in [Mage](https://docs.mage.ai/introduction/overview)
 
 **Problem**:
 
-**Weather and Air Quality Aggregator**: Collecting historical and forecast data from multiple sources, aggregate this data to analyze trends over time and provide a comprehensive forecast for different regions.
+**Weather and Air Quality Aggregator**: Collect historical and forecast data from various sources, aggregate the information to analyse trends over time, and generate comprehensive forecasts for different regions.
 
 ---
 
@@ -52,7 +52,7 @@ All steps are orchestrated in [Mage](https://docs.mage.ai/introduction/overview)
 Before running the code you need to follow the steps below.
 
 ### Setting up GCP
-Google Cloud is a suite of Cloud Computing services offered by Google that provides various services like compute, storage, networking, and many more. It is organized into Regions and Zones.
+Google Cloud is a suite of Cloud Computing services offered by Google that provides various services like compute, storage, networking, and many more. It is organised into Regions and Zones.
 
 Setting up GCP would require a GCP account. A GCP account can be created for free on trial but would still require a credit card to signup.
 
@@ -96,7 +96,7 @@ give it exactly the name `my-airquality-credentials.json`.
 ```bash
 terraform init
 ```
-4. To Show changes required by the current configuration you can run:
+4. To show changes required by the current configuration you can run:
 
 ```bash
 terraform plan
@@ -114,7 +114,7 @@ terraform destroy
 **IMPORTANT**: This line uses when you are done with the whole project.
 
 7. `cd` into the mage directory
-8. Rename `dev.env` to simply `.env`— this will ensure the file is not committed to Git by accident, since it will contain credentials in the future.
+8. Rename `dev.env` to simply `.env`.
 
 9. Now, let's build the container
 
@@ -152,49 +152,24 @@ This repository should have the following structure:
 │   ├── metadata.yaml
 │   └── requirements.txt
 ├── .gitignore
-├── dev.env
+├── .env
 ├── docker-compose.yml
 ├── Dockerfile
 └── requirements.txt
 ```
-**IMPORTANT**-Inside of mage you will find file called **io_config.yaml** .Inside this file scroll down to the line GOOGLE_SERVICE_ACC_KEY_FILEPATH and write this line "/home/src/my-airquality-credentials.json" Everything else you can comment like in the photo below.
 
-<img src="images/google-cred-mage.png" width="450"/>
+12. Time to work with mage. Go to the browser, find **pipelines**, click on air_quality_api pipeline and click on Run@once. 
 
----
-
-12. Time to work with mage. Go to the browser, find **pipelines** and create a new pipeline. 
-
-<img src="images/mage-find-pipelines.png" width="150" />
-<br>
-
-## Creating Pipeline in Mage.AI
-
-In this pipeline you need to create blocks. From the repo in pipeline folder copy files in the next order:
-
-```
-
-├── pipeline
-│   ├── api_air_quality_load_.py                    (Python, Data Loader)
-│   ├── air_api__to_gcs.py                          (Python, Data Exporter)
-│   ├── air_csv_to_bigquery.py                      (Python, Data Exporter)
-│   ├── create_air_quality_partition_table.sql      (SQL, Data Exporter)
-│   ├── air_aggregation.sql                         (SQL, Transformer)
-│   ├── api_weather_load.py                         (Python, Data Loader)
-│   ├── weather_api_to_gcs.py                       (Python, Data Exporter)
-│   ├── weather_csv_to_bigquery_table.py            (Python, Data Exporter)
-│   ├── create_air_quality_partition_table.sql      (SQL, Data Exporter)
-│   ├── weather_aggregation.sql                     (SQL, Transformer)
-│   ├── joined_tables.sql                           (SQL, Data Exporter)
-
-
-```
-
-When creating SQL blocks, select BigQuery and ensure to check 'Use raw SQL"
-
-<img src="images/SQL-block-example.png" width="450" />
-
-<br>
+<table><tr>
+<td> <img src="images/mage-find-pipelines.png" width="150"/> </td>
+<td> <img src="images/pipeline-name.png" width="350"/> </td>
+<td> <img src="images/run-pipeline.png" width="250"/> </td>
+<tr>
+<td>Find pipeline</td>
+<td>Pipeline </td>
+<td>Run pipeline </td>
+</tr>
+</tr></table>
 
 
 **IMPORTANT**: For some reason, an error may occur during the step of creating the 'air_aggregated' table, indicating '404 Not Found: Table air-quality-project-417718:air_quality.air_aggregated_data was not found in location EU.' However, if you navigate to BigQuery and refresh the database, the table should appear.
